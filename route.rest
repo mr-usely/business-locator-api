@@ -1,0 +1,43 @@
+GET http://localhost:3000/user
+
+###
+GET http://localhost:3000/businesslocator/635756ca016f100d9695fbc9
+
+
+### User Login
+
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+    "password": "kim-22",
+    "email": "kim@dev.com"
+}
+
+### Create User
+POST http://localhost:3000/user/create
+Content-Type: application/json
+
+{
+    "firstName": "Kim",
+    "lastName": "Adorna",
+    "birthDay": "03-04-1999",
+    "password": "kim-22",
+    "email": "kim@gmail.com"
+}
+
+
+###
+DELETE http://localhost:3000/business/delete/
+
+###
+POST  http://localhost:3000/business/create
+Content-Type: application/json
+
+{
+    "name": "Cjay Adorna",
+    "address": "Business Locator",
+    "lat": "",
+    "lng": "",
+    "classification": ""
+}
