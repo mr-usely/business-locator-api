@@ -44,11 +44,12 @@ POST  http://localhost:3000/business/create
 Content-Type: application/json
 
 {
-    "name": "KAWAYAN FOOD PRODUCTS",
-    "address": "SAN FERMIN, CAUAYAN CITY, ISABELA",
-    "lat": 16.995876445453302,
-    "lng": 121.7939292292389,
-    "classification": "Small"
+    "name": "NATHANIEL'S NATURE DROPS WATER REFILLING STATION",
+    "address": "TAGARAN, CAUAYAN CITY, ISABELA",
+    "lat": 16.96502997100683,
+    "lng": 121.7780490411296,
+    "barangay": "Tagaran",
+    "classification": "Medium"
 }
 
 ### Get Nearby business
@@ -61,6 +62,10 @@ GET http://localhost:3000/business
 
 ### getting all favorite items
 GET http://localhost:3000/favorite
+
+
+### get all barangays
+GET http://localhost:3000/business/all/brgys
 
 
 ### favorites

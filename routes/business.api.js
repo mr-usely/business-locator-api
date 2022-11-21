@@ -17,7 +17,6 @@ router.get('/', async (req, res) => {
 // Get Nearby Businesses
 router.get('/nearby/:lat/:lng', async (req, res) => {
     try {
-        console.log(parseFloat(req.params.lat))
         const nearby = await Business.aggregate([
             {
                 '$geoNear': {
@@ -45,10 +44,35 @@ router.get('/nearby/:lat/:lng', async (req, res) => {
 })
 
 
+// Get All Barangay's
+router.get('/all/brgys', async (req, res) => {
+    try {
+        const allBrgys = await Business.aggregate([
+            {
+              '$project': {
+                'barangay': 1
+              }
+            }, {
+              '$group': {
+                '_id': '$barangay'
+              }
+            },{
+                '$sort': {
+                  '_id': 1
+                }
+              }
+          ])
+
+        res.json(allBrgys)
+    } catch (err) {
+        res.status(500).json({ type: 'error', message: err.message })
+    }
+})
+
+
 // Creating Business
 router.post('/create', async (req, res) => {
     try {
-
         const checkName = await Business.findOne({ name: req.body.name });
 
         if (checkName == null) {
