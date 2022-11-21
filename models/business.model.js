@@ -1,5 +1,17 @@
 const mongoose = require('mongoose')
 
+const pointSchema = new mongoose.Schema({
+    type: {
+        type: String,
+        enum: ['Point'],
+        required: true
+    },
+    coordinates: {
+        type: [Number],
+        required: true
+    }
+});
+
 const businessModel = new mongoose.Schema({
     name: {
         type: String,
@@ -9,21 +21,21 @@ const businessModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    lat: {
-        type: mongoose.Types.Decimal128,
-        required: true,
-        get: getDoubleValue
+    location: {
+        type: pointSchema,
+        required: true
     },
-    lng: {
-        type: mongoose.Types.Decimal128,
-        require: true,
-        get: getDoubleValue
-    },
-    classification: {
+    barangay: {
         type: String,
         required: true
     },
+    classification: {
+        type: String,
+    },
+    id: false
 }, { timestamps: true, collection: 'Business', toJSON: { getters: true } })
+
+businessModel.index({ location: '2d' })
 
 function getDoubleValue(value) {
     if (typeof value !== 'undefined') {

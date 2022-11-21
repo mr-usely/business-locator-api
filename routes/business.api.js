@@ -13,6 +13,38 @@ router.get('/', async (req, res) => {
     }
 })
 
+
+// Get Nearby Businesses
+router.get('/nearby/:lat/:lng', async (req, res) => {
+    try {
+        console.log(parseFloat(req.params.lat))
+        const nearby = await Business.aggregate([
+            {
+                '$geoNear': {
+                    'near': {
+                        'type': 'Point',
+                        'coordinates': [
+                            parseFloat(req.params.lng), parseFloat(req.params.lat)
+                        ]
+                    },
+                    'distanceField': 'distance',
+                    'maxDistance': 3000,
+                    'query': {},
+                    'includeLocs': 'dist.location',
+                    'spherical': true
+                }
+            }, {
+                '$limit': 10
+            }
+        ])
+
+        res.json(nearby)
+    } catch (err) {
+        res.status(500).json({ type: 'error', message: err.message })
+    }
+})
+
+
 // Creating Business
 router.post('/create', async (req, res) => {
     try {
@@ -23,8 +55,10 @@ router.post('/create', async (req, res) => {
             const create = new Business({
                 name: req.body.name,
                 address: req.body.address,
-                lat: req.body.lat,
-                lng: req.body.lng,
+                barangay: req.body.barangay,
+                location: {
+                    type: "Point", coordinates: [req.body.lng, req.body.lat]
+                },
                 classification: req.body.classification
             })
 
@@ -50,12 +84,12 @@ router.patch('/update/:id', getBusiness, async (req, res) => {
             res.business.address = req.body.address
         }
 
-        if (req.body.lat != null) {
-            res.business.lat = req.body.lat
+        if (req.body.lat != null && req.body.lng != null) {
+            res.business.location.coordinates = [req.body.lng, req.body.lat]
         }
 
-        if (req.body.lng != null) {
-            res.business.lng = req.body.lng
+        if (req.body.barangay != null) {
+            res.business.barangay = req.body.barangay
         }
 
         if (req.body.classification != null) {
@@ -67,7 +101,6 @@ router.patch('/update/:id', getBusiness, async (req, res) => {
         const business = await Business.find()
 
         if (updatedBusiness != null) {
-            console.log('Business info updated')
             res.json(business)
         }
     } catch (err) {

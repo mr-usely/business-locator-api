@@ -1,5 +1,17 @@
 const mongoose = require('mongoose')
 
+const pointSchema = new mongoose.Schema({
+    type: {
+        type: String,
+        enum: ['Point'],
+        required: true
+    },
+    coordinates: {
+        type: [Number],
+        required: true
+    }
+});
+
 const favoritesModel = new mongoose.Schema({
     name: {
         type: String,
@@ -9,15 +21,13 @@ const favoritesModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    lat: {
-        type: mongoose.Types.Decimal128,
-        required: true,
-        get: getDoubleValue
+    location: {
+        type: pointSchema,
+        required: true
     },
-    lng: {
-        type: mongoose.Types.Decimal128,
-        require: true,
-        get: getDoubleValue
+    barangay: {
+        type: String,
+        required: true
     },
     classification: {
         type: String,
@@ -28,11 +38,7 @@ const favoritesModel = new mongoose.Schema({
     }
 }, { timestamps: true, collection: 'Favorites', toJSON: { getters: true } })
 
-function getDoubleValue(value) {
-    if (typeof value !== 'undefined') {
-        return parseFloat(value.toString());
-    }
-    return value;
-};
+
+
 
 module.exports = mongoose.model('Favorites', favoritesModel)

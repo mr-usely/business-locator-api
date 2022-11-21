@@ -1,11 +1,9 @@
-GET http://localhost:3000/user
 
-###
-GET http://localhost:3000/businesslocator/635756ca016f100d9695fbc9
+### getting all users
+GET http://localhost:3000/user
 
 
 ### User Login
-
 POST http://localhost:3000/user/login
 Content-Type: application/json
 
@@ -13,6 +11,7 @@ Content-Type: application/json
     "password": "kim-22",
     "email": "kim@dev.com"
 }
+
 
 ### Create User
 POST http://localhost:3000/user/create
@@ -23,21 +22,56 @@ Content-Type: application/json
     "lastName": "Adorna",
     "birthDay": "03-04-1999",
     "password": "kim-22",
-    "email": "kim@gmail.com"
+    "email": "kim@dev.com"
 }
 
 
-###
-DELETE http://localhost:3000/business/delete/
+### delete business
+DELETE http://localhost:3000/business/delete/637b2b9bb31fb40f23c2cb7c
 
-###
+
+### Update business
+PATCH http://localhost:3000/business/update/637b3d57e6bc8b0b35360c4a
+Content-Type: application/json
+
+{
+    "barangay": "San Fermin"
+}
+
+
+### create business
 POST  http://localhost:3000/business/create
 Content-Type: application/json
 
 {
-    "name": "Cjay Adorna",
-    "address": "Business Locator",
-    "lat": "",
-    "lng": "",
-    "classification": ""
+    "name": "KAWAYAN FOOD PRODUCTS",
+    "address": "SAN FERMIN, CAUAYAN CITY, ISABELA",
+    "lat": 16.995876445453302,
+    "lng": 121.7939292292389,
+    "classification": "Small"
 }
+
+### get all businesses
+GET http://localhost:3000/business
+
+
+### getting all favorite items
+GET http://localhost:3000/favorite
+
+
+### favorites
+POST  http://localhost:3000/favorite/add
+Content-Type: application/json
+
+{
+    "userId": "637860538e200281d78d3b9d",
+    "businessId": "637b28bd5b7e67527f5897b4"
+}
+
+
+### get favorite
+GET http://localhost:3000/favorite/637860538e200281d78d3b9d
+
+
+### delete favorite
+DELETE http://localhost:3000/favorite/delete/637ae1abefeaa37a1acf7eba
