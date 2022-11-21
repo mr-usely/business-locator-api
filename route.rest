@@ -51,6 +51,10 @@ Content-Type: application/json
     "classification": "Small"
 }
 
+### Get Nearby business
+GET http://localhost:3000/business/nearby/16.93365865587358/121.77421301486137
+
+
 ### get all businesses
 GET http://localhost:3000/business
 
