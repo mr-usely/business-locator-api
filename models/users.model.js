@@ -13,6 +13,9 @@ const userModel = new mongoose.Schema({
         type: String,
         required: true,
     },
+    address: {
+        type: String,
+    },
     birthDay: {
         type: Date,
         require: true

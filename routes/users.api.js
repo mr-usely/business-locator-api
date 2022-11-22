@@ -39,6 +39,35 @@ router.post('/create', async (req, res) => {
     }
 })
 
+router.patch('/update/:id', getUser, async (req, res) => {
+    try {
+        if (req.body.firstName != null) {
+            res.user.firstName = req.body.firstName
+        }
+
+        if (req.body.lastName != null) {
+            res.user.lastName = req.body.lastName
+        }
+
+        if (req.body.email != null) {
+            res.user.email = req.body.email
+        }
+
+        if (req.body.birthDay != null) {
+            res.user.birthDay = req.body.birthDay
+        }
+
+        if (req.body.address != null) {
+            res.user.address = req.body.address
+        }
+
+        const updateUser = await res.user.save()
+        res.json(updateUser)
+    } catch (err) {
+        res.status(400).json({ message: error.message })
+    }
+})
+
 
 // Deleting user
 router.delete('/delete/:id', getUser, async (req, res) => {
