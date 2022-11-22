@@ -49,19 +49,19 @@ router.get('/all/brgys', async (req, res) => {
     try {
         const allBrgys = await Business.aggregate([
             {
-              '$project': {
-                'barangay': 1
-              }
-            }, {
-              '$group': {
-                '_id': '$barangay'
-              }
-            },{
-                '$sort': {
-                  '_id': 1
+                '$project': {
+                    'barangay': 1
                 }
-              }
-          ])
+            }, {
+                '$group': {
+                    '_id': '$barangay'
+                }
+            }, {
+                '$sort': {
+                    '_id': 1
+                }
+            }
+        ])
 
         res.json(allBrgys)
     } catch (err) {
