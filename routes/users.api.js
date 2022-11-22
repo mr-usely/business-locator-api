@@ -62,9 +62,9 @@ router.patch('/update/:id', getUser, async (req, res) => {
         }
 
         const updateUser = await res.user.save()
-        res.json(updateUser)
+        res.json({ type: "success", message: "user is updated" })
     } catch (err) {
-        res.status(400).json({ message: error.message })
+        res.status(400).json({ type: 'error', message: error.message })
     }
 })
 

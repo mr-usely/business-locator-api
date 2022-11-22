@@ -4,7 +4,7 @@ GET http://localhost:3000/user
 
 
 ### User Login
-POST http://localhost:3000/user/login
+POST https://business-locator-api.onrender.com/user/login
 Content-Type: application/json
 
 {
