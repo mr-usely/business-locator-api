@@ -18,18 +18,24 @@ router.get('/', async (req, res) => {
 router.post('/add', async (req, res) => {
     try {
         const business = await Business.findById(req.body.businessId)
+        const checkExisting = await Favorites.findOne({ name: business.name, user: req.body.userId })
 
-        const favorites = new Favorites({
-            name: business.name,
-            address: business.address,
-            barangay: business.barangay,
-            location: business.location,
-            classification: business.classification,
-            user: req.body.userId
-        })
+        if (checkExisting == null) {
+            const favorites = new Favorites({
+                name: business.name,
+                address: business.address,
+                barangay: business.barangay,
+                location: business.location,
+                classification: business.classification,
+                user: req.body.userId
+            })
 
-        const createResult = await favorites.save()
-        res.status(201).json(createResult)
+            const createResult = await favorites.save()
+            res.status(201).json(createResult)
+        } else {
+            res.json({ type: "existing", message: "favorite already existing", results: checkExisting })
+        }
+
     } catch (err) {
         res.status(500).json({ type: 'error', message: err.message })
     }

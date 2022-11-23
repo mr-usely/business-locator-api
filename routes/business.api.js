@@ -14,6 +14,17 @@ router.get('/', async (req, res) => {
 })
 
 
+// find list of businesses
+router.get('/find/:search', async (req, res) => {
+    try {
+        const search = await Business.find({ '$text': { '$search': req.params.search } })
+        res.json(search);
+    } catch (err) {
+        res.status(500).json({ type: 'error', message: err.message })
+    }
+})
+
+
 // Get Nearby Businesses
 router.get('/nearby/:lat/:lng', async (req, res) => {
     try {

@@ -27,7 +27,7 @@ Content-Type: application/json
 
 
 ### delete business
-DELETE http://localhost:3000/business/delete/637b2b9bb31fb40f23c2cb7c
+DELETE http://localhost:3000/business/delete/637b28bd5b7e67527f5897b4
 
 
 ### Update business
@@ -44,11 +44,11 @@ POST  http://localhost:3000/business/create
 Content-Type: application/json
 
 {
-    "name": "NATHANIEL'S NATURE DROPS WATER REFILLING STATION",
-    "address": "TAGARAN, CAUAYAN CITY, ISABELA",
-    "lat": 16.96502997100683,
-    "lng": 121.7780490411296,
-    "barangay": "Tagaran",
+    "name": "ISABELA CAR RENTAL",
+    "address": "42, Purok 4 Turayong Rd, Cauayan City, 3305 Isabela",
+    "lat": 16.942927153380822,
+    "lng": 121.77502452166344,
+    "barangay": "Turayong",
     "classification": "Medium"
 }
 
@@ -68,27 +68,34 @@ GET http://localhost:3000/favorite
 GET http://localhost:3000/business/all/brgys
 
 
+### find business
+GET http://localhost:3000/business/find/DISTRICT
+
+
 ### favorites
 POST  http://localhost:3000/favorite/add
 Content-Type: application/json
 
 {
-    "userId": "637860538e200281d78d3b9d",
-    "businessId": "637b28bd5b7e67527f5897b4"
+    "userId": "637dbc46e9462a9da3680684",
+    "businessId": "637b3c7de6bc8b0b35360c36"
 }
 
 
 ### get favorite
-GET http://localhost:3000/favorite/637860538e200281d78d3b9d
+GET http://localhost:3000/favorite/637888d489872797df70fe42
 
 
 ### delete favorite
 DELETE http://localhost:3000/favorite/delete/637ae1abefeaa37a1acf7eba
+
 
 ###
 GET https://maps.googleapis.com/maps/api/distancematrix/json
   ?destinations=16.942927153380822%2C16.942927153380822
   &origins=16.9359495%2C121.7642425
   &key=AIzaSyAp8QZd2vS-sPIooFRbVx3xzQzRupqz4J8
+
+
 ###
 GET https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=16.9359495,121.7642425&destinations=16.942927153380822, 16.942927153380822&key=AIzaSyAp8QZd2vS-sPIooFRbVx3xzQzRupqz4J8

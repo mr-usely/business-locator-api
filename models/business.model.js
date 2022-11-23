@@ -33,9 +33,10 @@ const businessModel = new mongoose.Schema({
         type: String,
     },
     id: false
-}, { timestamps: true, collection: 'Business'})
+}, { timestamps: true, collection: 'Business' })
 
 businessModel.index({ location: '2dsphere' })
+businessModel.index({ name: 'text', address: 'text', barangay: 'text', classification: 'text' })
 
 function getDoubleValue(value) {
     if (typeof value !== 'undefined') {
